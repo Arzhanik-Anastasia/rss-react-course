@@ -1,6 +1,8 @@
 import { Component } from 'react';
-import Footer from '../../component/Footer/Footer';
-import Header from '../../component/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import CardList from '../../components/CardList/CardList';
+
 import './main.css';
 
 class Main extends Component {
@@ -8,7 +10,8 @@ class Main extends Component {
     return (
       <div className="app">
         <Header />
-        <h2>Home page</h2>
+        <h2 data-testid="home-page">Home page</h2>
+        <CardList term="" />
         <Footer />
       </div>
     );
