@@ -1,13 +1,15 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import Footer from '../../component/Footer/Footer';
+import Header from '../../component/Header/Header';
 import './main.css';
 
 class Main extends Component {
   render() {
     return (
       <div className="app">
-        <Link to="/">Home</Link>
-        <Link to="/about">About Us</Link>
+        <Header />
+        <h2>Home page</h2>
+        <Footer />
       </div>
     );
   }
