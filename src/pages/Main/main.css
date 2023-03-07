@@ -1,0 +1,12 @@
+.app,
+.header {
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+a {
+  margin: 0 30px 0 0;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}

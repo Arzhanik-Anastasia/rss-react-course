@@ -1,1 +1,1 @@
-# ress-react-course
+# rss-react-course
