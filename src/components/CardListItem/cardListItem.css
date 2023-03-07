@@ -44,6 +44,8 @@
     text-align: center;
 }
 
-.icon-like.active {
+.icon-like-active {
+    margin-right: 5px;
+    cursor: pointer;
     fill: rgb(253, 106, 106);
 }
