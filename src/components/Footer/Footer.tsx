@@ -4,7 +4,7 @@ import './footer.css';
 class Footer extends Component {
   info = {
     name: 'Anastasia Arzhanik',
-    year: 2022,
+    year: 2023,
     pathGithube: 'https://github.com/Arzhanik-Anastasia',
     pathRss: 'https://rs.school/js/',
   };
