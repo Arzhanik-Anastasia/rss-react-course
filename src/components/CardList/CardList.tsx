@@ -20,10 +20,32 @@ class CardList extends Component<IProps, StateType> {
     };
   }
 
+  searchCard = (cards: IData[], term = '') => {
+    if (term.length === 0) {
+      return cards;
+    }
+    return cards.filter((elem) => {
+      return elem.title.toUpperCase().indexOf(term.toUpperCase()) > -1;
+    });
+  };
+
+  onLiked = (id: number) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, liked: !item.liked };
+        }
+        return item;
+      }),
+    }));
+  };
+
   render() {
-    const elements = this.state.data.map((item: IData) => {
+    const { term } = this.props;
+    const visibleData = this.searchCard(this.state.data, term);
+    const elements = visibleData.map((item: IData) => {
       const { id, ...itemProps } = item;
-      return <CardListItem key={id} {...itemProps} />;
+      return <CardListItem key={id} {...itemProps} onLiked={() => this.onLiked(id)} />;
     });
     return <ul className="card__list"> {elements}</ul>;
   }

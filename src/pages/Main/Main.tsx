@@ -1,17 +1,31 @@
 import { Component } from 'react';
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
-import CardList from '../../components/CardList/CardList';
-
 import './main.css';
+import Header from '../../components/Header/Header';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import CardList from '../../components/CardList/CardList';
+import Footer from '../../components/Footer/Footer';
 
-class Main extends Component {
+type StateType = {
+  term: string;
+};
+
+class Main extends Component<Record<string, unknown>, StateType> {
+  state = {
+    term: localStorage.getItem('search') || '',
+  };
+
+  onUpdateSearchBar = (term: string): void => {
+    this.setState({ term });
+  };
+
   render() {
+    const { term } = this.state;
     return (
       <div className="app">
         <Header />
         <h2 data-testid="home-page">Home page</h2>
-        <CardList term="" />
+        <SearchBar onUpdateSearchBar={this.onUpdateSearchBar} term={term} />
+        <CardList term={term} />
         <Footer />
       </div>
     );
