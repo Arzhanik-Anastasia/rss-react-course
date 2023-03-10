@@ -8,3 +8,10 @@ export default interface IData {
   seeCount: number;
   liked: boolean;
 }
+
+export interface IFormValue {
+  firstName: string;
+  lastName: string;
+  zipCode: string;
+  birthDay: string;
+}
