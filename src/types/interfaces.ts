@@ -14,4 +14,5 @@ export interface IFormValue {
   lastName: string;
   zipCode: string;
   birthDay: string;
+  country: string;
 }

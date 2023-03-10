@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './unConrolledForm.css';
 import React from 'react';
+import Input from './InputForm/InputForm';
 
 type IState = {
   firstNameError: boolean;
@@ -10,11 +11,16 @@ type IState = {
   zipCodeError: boolean;
   zipCodeErrorText: string;
   birthDayError: boolean;
-  birthDayErrorText: string;
 };
 
 type IProps = {
-  onAddCard: (firstName: string, lastName: string, zipCode: string, birthDay: string) => void;
+  onAddCard: (
+    firstName: string,
+    lastName: string,
+    zipCode: string,
+    birthDay: string,
+    country: string
+  ) => void;
 };
 
 class UncontrolledForm extends React.Component<IProps, IState> {
@@ -22,10 +28,10 @@ class UncontrolledForm extends React.Component<IProps, IState> {
   lastName = React.createRef<HTMLInputElement>();
   zipCode = React.createRef<HTMLInputElement>();
   birthDay = React.createRef<HTMLInputElement>();
-  country = React.createRef<HTMLInputElement>();
-  sexInput = React.createRef<HTMLInputElement>();
+  country = React.createRef<HTMLSelectElement>();
+  /* sexInput = React.createRef<HTMLInputElement>();
   email = React.createRef<HTMLInputElement>();
-  agree = React.createRef<HTMLInputElement>();
+  agree = React.createRef<HTMLInputElement>(); */
   state = {
     firstNameError: true,
     firstNameErrorText: '',
@@ -34,7 +40,6 @@ class UncontrolledForm extends React.Component<IProps, IState> {
     zipCodeError: true,
     zipCodeErrorText: '',
     birthDayError: true,
-    birthDayErrorText: '',
   };
 
   onSubmit = (e: { preventDefault: () => void }) => {
@@ -50,13 +55,13 @@ class UncontrolledForm extends React.Component<IProps, IState> {
         this.firstName.current!.value,
         this.lastName.current!.value,
         this.zipCode.current!.value,
-        this.birthDay.current!.value
+        this.birthDay.current!.value,
+        this.country.current!.value
       );
     }
   };
 
-  onChangeHandle(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log('чен', e.target.name);
+  onChangeHandle(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     switch (e.target.name) {
       case 'firstName':
         if (this.firstName.current!.value) {
@@ -92,93 +97,60 @@ class UncontrolledForm extends React.Component<IProps, IState> {
         }
         break;
       case 'birthDay':
-        console.log(this.birthDay.current!.value);
         if (this.birthDay.current!.value) {
-          this.setState({ birthDayError: false, birthDayErrorText: '' });
+          this.setState({ birthDayError: false });
         } else {
           this.setState({
             birthDayError: true,
-            birthDayErrorText: 'Обязательное к заполнению поле',
           });
         }
         break;
     }
-    // this.onValidate();
   }
 
   render() {
-    console.log(
-      'ошибки',
-      this.state.firstNameError,
-      this.state.lastNameError,
-      this.state.zipCodeError,
-      this.state.birthDayError
-    );
     return (
       <form className="form" onSubmit={this.onSubmit}>
-        <label htmlFor="firstName">
-          <p>
-            First Name
-            {this.state.firstNameError ? (
-              <span className="error-span" style={{ color: 'red' }}>
-                {this.state.firstNameErrorText}
-              </span>
-            ) : (
-              ''
-            )}
-          </p>
-          <input
-            type="text"
-            name="firstName"
-            ref={this.firstName}
-            onChange={(e) => this.onChangeHandle(e)}
-          />
-        </label>
-        <label htmlFor="lastName">
-          <p>
-            Last Name
-            {this.state.lastNameError ? (
-              <span className="error-span" style={{ color: 'red' }}>
-                {this.state.lastNameErrorText}
-              </span>
-            ) : (
-              ''
-            )}
-          </p>
-          <input
-            type="text"
-            name="lastName"
-            ref={this.lastName}
-            onChange={(e) => this.onChangeHandle(e)}
-          />
-        </label>
-        <label htmlFor="zipcode">
-          <p>
-            Zip Code
-            {this.state.zipCodeError ? (
-              <span className="error-span" style={{ color: 'red' }}>
-                {this.state.zipCodeErrorText}
-              </span>
-            ) : (
-              ''
-            )}
-          </p>
-          <input
-            type="number"
-            name="zipcode"
-            ref={this.zipCode}
-            onChange={(e) => this.onChangeHandle(e)}
-          />
-        </label>
-        <label htmlFor="birthDay">
-          Birth Day
-          <input
-            type="date"
-            name="birthDay"
-            ref={this.birthDay}
-            onChange={(e) => this.onChangeHandle(e)}
-          />
-        </label>
+        <Input
+          nameInput={'firstName'}
+          textLabel={'First Name'}
+          type={'text'}
+          error={this.state.firstNameError}
+          errorText={this.state.firstNameErrorText}
+          refElem={this.firstName}
+          onChange={(e) => this.onChangeHandle(e)}
+        />
+        <Input
+          nameInput={'lastName'}
+          textLabel={'Last Name'}
+          type={'text'}
+          error={this.state.lastNameError}
+          errorText={this.state.lastNameErrorText}
+          refElem={this.lastName}
+          onChange={(e) => this.onChangeHandle(e)}
+        />
+        <Input
+          nameInput={'zipcode'}
+          textLabel={'Zip Code'}
+          type={'text'}
+          error={this.state.zipCodeError}
+          errorText={this.state.zipCodeErrorText}
+          refElem={this.zipCode}
+          onChange={(e) => this.onChangeHandle(e)}
+        />
+        <Input
+          nameInput={'birthDay'}
+          textLabel={'Birth Day'}
+          type={'date'}
+          refElem={this.birthDay}
+          onChange={(e) => this.onChangeHandle(e)}
+        />
+
+        <select name="country" ref={this.country} onChange={(e) => this.onChangeHandle(e)}>
+          <option value="Belarus">Беларусь</option>
+          <option value="Ukraine"> Украина</option>
+          <option value="Latvia">Латвия</option>
+        </select>
         <button
           type="submit"
           className="form__btn-submit"

@@ -2,21 +2,31 @@ import { Component } from 'react';
 import CardForm from '../../components/CardForm/CardForm';
 import Header from '../../components/Header/Header';
 import UncontrolledForm from '../../components/UnControlledForm/UnControlledForm';
+import { IFormValue } from '../../types/interfaces';
 import './formPage.css';
 
 type IState = {
   formValue: IFormValue[] | [];
 };
 
-class FormPage extends Component<Record<string, unknown>, IState> {
+class FormPage extends Component<IState> {
   state = {
     formValue: [],
   };
 
-  onAddCard = (firstName: string, lastName: string) => {
+  onAddCard = (
+    firstName: string,
+    lastName: string,
+    zipCode: string,
+    birthDay: string,
+    country: string
+  ) => {
     const newItem = {
       firstName,
       lastName,
+      zipCode,
+      birthDay,
+      country,
     };
 
     const newArr = [...this.state.formValue, newItem];
