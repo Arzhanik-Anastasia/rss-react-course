@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import About from './pages/About/About';
+import FormPage from './pages/FormPage/FormPage';
 import Main from './pages/Main/Main';
 import NotFound from './pages/NotFound/NotFound';
 
@@ -12,6 +13,7 @@ describe('React Router', () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/form" element={<FormPage />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -29,6 +31,7 @@ describe('React Router', () => {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<About />} />
+          <Route path="/form" element={<FormPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
@@ -68,5 +71,7 @@ describe('React Router', () => {
     fireEvent.click(getByTestId('home-link'));
     expect(screen.getByText(/Home Page/i)).toBeInTheDocument();
     expect(getByTestId('header')).toContainElement(getByTestId('home-link'));
+    fireEvent.click(getByTestId('form-link'));
+    expect(container.innerHTML).toMatch('Form');
   });
 });
