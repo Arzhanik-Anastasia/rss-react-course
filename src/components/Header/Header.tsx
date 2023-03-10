@@ -11,6 +11,9 @@ class Header extends Component {
         <Link data-testid="about-link" to="/about">
           About Us
         </Link>
+        <Link data-testid="form-link" to="/form">
+          Form
+        </Link>
       </header>
     );
   }

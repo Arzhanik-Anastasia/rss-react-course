@@ -4,16 +4,23 @@ import './cardForm.css';
 
 class CardForm extends Component<IFormValue> {
   render() {
-    const { firstName, lastName, zipCode, birthDay } = this.props;
+    const { firstName, lastName, zipCode, birthDay, country, news, avatar } = this.props;
+    const imgAvatar = avatar ? URL.createObjectURL(avatar) : '';
     return (
       <li className="card_form">
-        <p>name: {firstName}</p>
-        <p>surName: {lastName}</p>
-        <p>zipcode: {zipCode} </p>
-        <p>birthDay: {birthDay}</p>
-        {/* <p>sex: Female</p>
-        <p>birthDay: 1705020</p>
-        <p>Country: Belarus</p> */}
+        <div className="user__avatar">
+          <img src={imgAvatar} alt="avatar" data-testid="img-avatar" />
+        </div>
+        <div className="user__info">
+          UserInfo
+          <p>name: {firstName}</p>
+          <p>surName: {lastName}</p>
+          <p>zipcode: {zipCode} </p>
+          <p>birthDay: {birthDay}</p>
+          <p>country: {country}</p>
+          <p data-testid="news">Получать уведомления: {news ? 'Да' : 'Нет'} </p>
+          <p>Согласен на обработку данных: Да </p>
+        </div>
       </li>
     );
   }

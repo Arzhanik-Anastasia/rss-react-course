@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './inputForm.css';
+import './input.css';
 
 type IProps = {
   nameInput: string;
@@ -8,6 +8,8 @@ type IProps = {
   error?: boolean;
   errorText?: string;
   refElem: React.RefObject<HTMLInputElement>;
+  datatestId: string;
+  max?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
@@ -16,20 +18,28 @@ class Input extends Component<IProps> {
     super(props);
   }
   render() {
-    const { nameInput, textLabel, type, error, errorText, refElem, onChange } = this.props;
+    const { nameInput, textLabel, type, error, errorText, refElem, onChange, datatestId, max } =
+      this.props;
     return (
       <label htmlFor={nameInput}>
         <p>
           {textLabel}
           {error ? (
-            <span className="error-span" style={{ color: 'red' }}>
+            <span className="error-span" data-testid="error" style={{ color: 'red' }}>
               {errorText}
             </span>
           ) : (
             ''
           )}
         </p>
-        <input type={type} name={nameInput} ref={refElem} onChange={onChange} />
+        <input
+          type={type}
+          name={nameInput}
+          ref={refElem}
+          data-testid={datatestId}
+          onChange={onChange}
+          max={max}
+        />
       </label>
     );
   }

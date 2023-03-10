@@ -1,6 +1,30 @@
 .card_form {
-    list-style: none;
-    border: 2px solid black;
-    margin-top: 50px;
-    width: 200px;
+  list-style: none;
+  border: 2px solid #30c5ff;
+  border-radius: 15px;
+  min-width: 500px;
+  margin: 50px 0 0 0;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
+    Verdana, sans-serif;
+  font-weight: 300;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user__info {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user__info p {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.user__avatar img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
 }

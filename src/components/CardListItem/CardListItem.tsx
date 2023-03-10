@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './cardListItem.css';
 
 type IProps = {
+  id: number;
   title: string;
   author: string;
   img: string;
@@ -9,12 +10,18 @@ type IProps = {
   likedCount: number;
   seeCount: number;
   liked: boolean;
-  onLiked?: () => void;
+  onLiked: (id: number) => void;
 };
 
 class CardListItem extends Component<IProps> {
   render() {
-    const { title, author, description, img, seeCount, liked, onLiked, likedCount } = this.props;
+    const { id, title, author, description, img, seeCount, liked, onLiked } = this.props;
+    let { likedCount } = this.props;
+    let classNameLikeButton = 'icon-like';
+    if (liked) {
+      classNameLikeButton += ' active';
+      likedCount++;
+    }
     return (
       <li className="card_item">
         <img className="card__img" src={img} alt={title} />
@@ -27,12 +34,12 @@ class CardListItem extends Component<IProps> {
             height="16"
             viewBox="0.5 0.5 16 16"
             data-testid="like-btn"
-            className={liked ? 'icon-like-active' : 'icon-like'}
-            onClick={onLiked}
+            className={classNameLikeButton}
+            onClick={() => onLiked(id)}
           >
             <path d="M.5 7.5h3v8h-3zM7.207 15.207c.193.19.425.29.677.293H12c.256 0 .512-.098.707-.293l2.5-2.5c.19-.19.288-.457.293-.707V8.5c0-.553-.445-1-1-1h-5L11 5s.5-.792.5-1.5v-1c0-.553-.447-1-1-1l-1 2-4 4v6l1.707 1.707z"></path>
           </svg>
-          <span data-testid="like-count">{liked ? likedCount + 1 : likedCount}</span>
+          <span data-testid="like-count">{likedCount}</span>
           <svg width="16" height="16" viewBox="0 0 16 16" className="icon-see">
             <path d="M8.5 3.5c-5 0-8 5-8 5s3 5 8 5 8-5 8-5-3-5-8-5zm0 7c-1.105 0-2-.896-2-2 0-1.106.895-2 2-2 1.104 0 2 .894 2 2 0 1.104-.896 2-2 2z"></path>
           </svg>

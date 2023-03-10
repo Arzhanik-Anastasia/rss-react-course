@@ -1,4 +1,4 @@
-export default interface IData {
+export type IData = {
   id: number;
   title: string;
   author: string;
@@ -7,12 +7,14 @@ export default interface IData {
   likedCount: number;
   seeCount: number;
   liked: boolean;
-}
+};
 
-export interface IFormValue {
+export type IFormValue = {
   firstName: string;
   lastName: string;
   zipCode: string;
   birthDay: string;
   country: string;
-}
+  news: boolean;
+  avatar: File;
+};
