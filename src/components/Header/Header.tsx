@@ -1,16 +1,25 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import './header.css';
 
 class Header extends Component {
   render() {
     return (
       <header data-testid="header" className="header">
-        <Link data-testid="home-link" to="/">
+        <NavLink
+          data-testid="home-link"
+          to="/"
+          className={({ isActive }) => (isActive ? 'active-link' : '')}
+        >
           Home
-        </Link>
-        <Link data-testid="about-link" to="/about">
+        </NavLink>
+        <NavLink
+          data-testid="about-link"
+          to="/about"
+          className={({ isActive }) => (isActive ? 'active-link' : '')}
+        >
           About Us
-        </Link>
+        </NavLink>
       </header>
     );
   }
