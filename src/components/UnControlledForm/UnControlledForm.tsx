@@ -260,6 +260,7 @@ class UncontrolledForm extends React.Component<IProps, IState> {
         />
         <Input
           nameInput="check"
+          className="input__checkbox"
           textLabel="Согласие на обработку данных"
           refElem={this.agree}
           type="checkbox"

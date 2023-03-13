@@ -3,6 +3,7 @@ import './input.css';
 
 type IProps = {
   nameInput: string;
+  className?: string;
   textLabel: string;
   type: string;
   error?: boolean;
@@ -18,8 +19,18 @@ class Input extends Component<IProps> {
     super(props);
   }
   render() {
-    const { nameInput, textLabel, type, error, errorText, refElem, onChange, datatestId, max } =
-      this.props;
+    const {
+      nameInput,
+      className,
+      textLabel,
+      type,
+      error,
+      errorText,
+      refElem,
+      onChange,
+      datatestId,
+      max,
+    } = this.props;
     return (
       <label htmlFor={nameInput}>
         <p>
@@ -34,6 +45,7 @@ class Input extends Component<IProps> {
         </p>
         <input
           type={type}
+          className={className ? className : ''}
           name={nameInput}
           ref={refElem}
           data-testid={datatestId}
