@@ -1,0 +1,10 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px;
+    align-items: center;
+  }
+  .footer_date {
+    font-size: 20px;
+  }
+  

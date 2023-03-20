@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+header a {
+    color: whitesmoke;
+}
+
+.active-link {
+    color:#75ffa4f0;
+}
