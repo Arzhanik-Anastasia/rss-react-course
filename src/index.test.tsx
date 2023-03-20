@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Layout from './components/Layout/Layout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import About from './pages/About/About';
@@ -11,9 +12,9 @@ describe('React Router', () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Layout content={{ cont: <Main />, title: 'home' }} />} />
+          <Route path="/about" element={<Layout content={{ cont: <About />, title: 'about' }} />} />
+          <Route path="*" element={<Layout content={{ cont: <NotFound />, title: '404' }} />} />
         </Routes>
       </BrowserRouter>
     );
@@ -27,9 +28,9 @@ describe('React Router', () => {
     const { container, getByTestId } = render(
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Layout content={{ cont: <Main />, title: 'home' }} />} />
+          <Route path="/about" element={<Layout content={{ cont: <About />, title: 'about' }} />} />
+          <Route path="*" element={<Layout content={{ cont: <NotFound />, title: '404' }} />} />
         </Routes>
       </BrowserRouter>
     );
@@ -42,9 +43,9 @@ describe('React Router', () => {
     render(
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Layout content={{ cont: <Main />, title: 'home' }} />} />
+          <Route path="/about" element={<Layout content={{ cont: <About />, title: 'about' }} />} />
+          <Route path="*" element={<Layout content={{ cont: <NotFound />, title: '404' }} />} />
         </Routes>
       </BrowserRouter>
     );
@@ -54,9 +55,16 @@ describe('React Router', () => {
   it('Should save to local storage value from input', (): void => {
     const { container, getByTestId } = render(
       <BrowserRouter>
-        <Main>
-          <input data-testid="search-input" />
-        </Main>
+        <Layout
+          content={{
+            cont: (
+              <Main>
+                <input data-testid="search-input" />
+              </Main>
+            ),
+            title: 'home',
+          }}
+        />
       </BrowserRouter>
     );
     const inputElement = getByTestId('search-input');
