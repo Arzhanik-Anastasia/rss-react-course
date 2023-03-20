@@ -22,11 +22,9 @@ class Main extends Component<Record<string, unknown>, StateType> {
     const { term } = this.state;
     return (
       <div className="app">
-        <Header />
         <h2 data-testid="home-page">Home page</h2>
         <SearchBar onUpdateSearchBar={this.onUpdateSearchBar} term={term} />
         <CardList term={term} />
-        <Footer />
       </div>
     );
   }
