@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './unConrolledForm.css';
 import React from 'react';
 import Input from './Input/Input';
 import Switcher from './Switcher/Switcher';
 import InputFile from './InputFile/InputFile';
+import { checkedDate, getToday } from './../../utils/helpers';
 
 type IState = {
   firstNameError: boolean;
@@ -126,7 +126,7 @@ class UncontrolledForm extends React.Component<IProps, IState> {
         }
         break;
       case 'birthDay':
-        const checked = this.checkedDate(this.birthDay.current!.value);
+        const checked = checkedDate(this.birthDay.current!.value);
         if (this.birthDay.current!.value && checked) {
           this.setState({ birthDayError: false, birthDayErrorText: '' });
         } else {
@@ -159,25 +159,6 @@ class UncontrolledForm extends React.Component<IProps, IState> {
         }
         break;
     }
-  }
-
-  checkedDate = (value: string): boolean => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const dob = new Date(value);
-    const dobnow = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
-    let age = today.getFullYear() - dob.getFullYear();
-    if (today < dobnow) {
-      age = age - 1;
-    }
-    return age >= 18 ? true : false;
-  };
-
-  getToday(): string {
-    const today = new Date();
-    return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
-      today.getDate()
-    ).padStart(2, '0')}`;
   }
 
   render() {
@@ -234,7 +215,7 @@ class UncontrolledForm extends React.Component<IProps, IState> {
           refElem={this.birthDay}
           error={birthDayError}
           errorText={birthDayErrorText}
-          max={this.getToday()}
+          max={getToday()}
           datatestId="input-birthDay"
           onChange={(e) => this.onChangeHandle(e)}
         />

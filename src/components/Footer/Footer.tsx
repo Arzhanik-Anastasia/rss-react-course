@@ -19,7 +19,7 @@ class Footer extends Component {
           {this.info.year} {this.info.name}
         </div>
         <a href={this.info.pathGithube}>
-          <img src="./../png/github.svg" alt="logo githube" width="50" height="50" />
+          <img src="./../svg/github.svg" alt="logo githube" width="50" height="50" />
         </a>
       </footer>
     );

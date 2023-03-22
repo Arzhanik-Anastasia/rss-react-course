@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -25,7 +25,8 @@ describe('React Router', () => {
     expect(header).toContainElement(link);
   });
 
-  it('should navigate to page', (): void => {
+  it('should navigate to page', async (): Promise<void> => {
+    const user = userEvent.setup();
     const { container, getByTestId } = render(
       <BrowserRouter>
         <Routes>
@@ -36,7 +37,7 @@ describe('React Router', () => {
         </Routes>
       </BrowserRouter>
     );
-    fireEvent.click(getByTestId('about-link'));
+    await user.click(getByTestId('about-link'));
     expect(container.innerHTML).toMatch('about');
   });
 
@@ -54,7 +55,8 @@ describe('React Router', () => {
     expect(screen.getByText(/Not found/i)).toBeInTheDocument();
   });
 
-  it('Should save to local storage value from input', (): void => {
+  it('Should save to local storage value from input', async (): Promise<void> => {
+    const user = userEvent.setup();
     const { container, getByTestId } = render(
       <BrowserRouter>
         <Main>
@@ -64,14 +66,14 @@ describe('React Router', () => {
     );
     const inputElement = getByTestId('search-input');
     expect(screen.getByText(/Home Page/i)).toBeInTheDocument();
-    userEvent.type(inputElement, '');
-    expect(inputElement).toHaveValue('');
-    fireEvent.click(getByTestId('about-link'));
+    await user.type(inputElement, 'hi');
+    expect(inputElement).toHaveValue('hi');
+    await user.click(getByTestId('about-link'));
     expect(container.innerHTML).toMatch('about');
-    fireEvent.click(getByTestId('home-link'));
+    await user.click(getByTestId('home-link'));
     expect(screen.getByText(/Home Page/i)).toBeInTheDocument();
     expect(getByTestId('header')).toContainElement(getByTestId('home-link'));
-    fireEvent.click(getByTestId('form-link'));
+    await user.click(getByTestId('form-link'));
     expect(container.innerHTML).toMatch('Form');
   });
 });
