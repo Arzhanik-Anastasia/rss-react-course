@@ -16,3 +16,15 @@ export const getToday = (): string => {
     today.getDate()
   ).padStart(2, '0')}`;
 };
+
+export const validateFirstName = (name: string) => {
+  return name.length > 4 ? true : false;
+};
+
+export const validateLastName = (name: string) => {
+  return name.length > 4 ? true : false;
+};
+
+export const validateZipCode = (code: string) => {
+  return code.length >= 6 ? true : false;
+};

@@ -6,12 +6,10 @@ type IProps = {
   className?: string;
   textLabel: string;
   type: string;
-  error?: boolean;
   errorText?: string;
   refElem: React.RefObject<HTMLInputElement>;
   datatestId: string;
   max?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
 class Input extends Component<IProps> {
@@ -19,24 +17,18 @@ class Input extends Component<IProps> {
     super(props);
   }
   render() {
-    const {
-      nameInput,
-      className,
-      textLabel,
-      type,
-      error,
-      errorText,
-      refElem,
-      onChange,
-      datatestId,
-      max,
-    } = this.props;
+    const { nameInput, className, textLabel, type, errorText, refElem, datatestId, max } =
+      this.props;
     return (
       <label htmlFor={nameInput}>
         <p>
           {textLabel}
-          {error ? (
-            <span className="error-span" data-testid="error" style={{ color: 'red' }}>
+          {errorText && errorText.length > 0 ? (
+            <span
+              className="error-span"
+              data-testid={`error-${nameInput}`}
+              style={{ color: 'red' }}
+            >
               {errorText}
             </span>
           ) : (
@@ -49,7 +41,6 @@ class Input extends Component<IProps> {
           name={nameInput}
           ref={refElem}
           data-testid={datatestId}
-          onChange={onChange}
           max={max}
         />
       </label>

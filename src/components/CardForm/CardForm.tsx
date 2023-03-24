@@ -5,7 +5,7 @@ import './cardForm.css';
 class CardForm extends Component<IFormValue> {
   render() {
     const { firstName, lastName, zipCode, birthDay, country, news, avatar } = this.props;
-    const imgAvatar = avatar ? URL.createObjectURL(avatar) : '';
+    const imgAvatar = URL.createObjectURL(avatar);
     return (
       <li className="card_form">
         <div className="user__avatar">

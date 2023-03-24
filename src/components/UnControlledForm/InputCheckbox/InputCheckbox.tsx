@@ -1,10 +1,9 @@
 import { Component } from 'react';
 
 type IProps = {
-  error?: boolean;
+  /*   error?: boolean; */
   errorText?: string;
   refElem: React.RefObject<HTMLInputElement>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
 class InputCheckbox extends Component<IProps> {
@@ -12,13 +11,13 @@ class InputCheckbox extends Component<IProps> {
     super(props);
   }
   render() {
-    const { error, errorText, refElem, onChange } = this.props;
+    const { errorText, refElem } = this.props;
     return (
       <label htmlFor="check">
         <p>
           {'Согласие на обработку данных'}
-          {error ? (
-            <span className="error-span" data-testid="error" style={{ color: 'red' }}>
+          {errorText && errorText?.length > 0 ? (
+            <span className="error-span" data-testid="error-checkbox" style={{ color: 'red' }}>
               {errorText}
             </span>
           ) : (
@@ -31,7 +30,6 @@ class InputCheckbox extends Component<IProps> {
           name="check"
           ref={refElem}
           data-testid="input-checkbox"
-          onChange={onChange}
         />
       </label>
     );

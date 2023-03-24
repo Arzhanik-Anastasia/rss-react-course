@@ -3,11 +3,10 @@ import './inputFile.css';
 
 type IProps = {
   textLabel: string;
-  error?: boolean;
+  /*   error?: boolean; */
   errorText?: string;
   refElem: React.RefObject<HTMLInputElement>;
   datatestId: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
 
 class InputFile extends Component<IProps> {
@@ -15,7 +14,7 @@ class InputFile extends Component<IProps> {
     super(props);
   }
   render() {
-    const { textLabel, error, errorText, refElem, onChange } = this.props;
+    const { textLabel, /* error, */ errorText, refElem } = this.props;
     return (
       <div className="wraper-input-file">
         <label htmlFor="avatar" className="label-input-file">
@@ -24,7 +23,7 @@ class InputFile extends Component<IProps> {
           </span>
           <p className="file-text">
             {textLabel}
-            {error ? (
+            {errorText && errorText.length > 0 ? (
               <span className="error-span" data-testid="error" style={{ color: 'red' }}>
                 {errorText}
               </span>
@@ -38,7 +37,6 @@ class InputFile extends Component<IProps> {
             name="avatar"
             ref={refElem}
             data-testid="input-avatar"
-            onChange={onChange}
           />
         </label>
       </div>
