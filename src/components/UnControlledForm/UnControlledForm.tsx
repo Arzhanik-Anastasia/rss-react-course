@@ -4,6 +4,8 @@ import Input from './Input/Input';
 import Switcher from './Switcher/Switcher';
 import InputFile from './InputFile/InputFile';
 import { checkedDate, getToday } from './../../utils/helpers';
+import Select from './Select/Select';
+import InputCheckbox from './InputCheckbox/InputCheckbox';
 
 type IState = {
   firstNameError: boolean;
@@ -219,42 +221,30 @@ class UncontrolledForm extends React.Component<IProps, IState> {
           datatestId="input-birthDay"
           onChange={(e) => this.onChangeHandle(e)}
         />
-        <select name="country" ref={this.country}>
-          <option value="Belarus">Беларусь</option>
-          <option value="Ukraine">Украина</option>
-          <option value="Latvia">Латвия</option>
-        </select>
+        <Select refSelect={this.country} />
         <Switcher refElem={this.news} />
         <InputFile
-          nameInput="avatar"
           textLabel={
             this.photo.current && this.photo.current!.files![0]
               ? 'Файл загружен'
               : 'Выберите аватар'
           }
-          type="file"
           refElem={this.photo}
           error={photoError}
           errorText={photoErrorText}
           datatestId="input-avatar"
           onChange={(e) => this.onChangeHandle(e)}
         />
-        <Input
-          nameInput="check"
-          className="input__checkbox"
-          textLabel="Согласие на обработку данных"
-          refElem={this.agree}
-          type="checkbox"
-          datatestId="input-checkbox"
+        <InputCheckbox
           error={agreeError}
           errorText={agreeErrorText}
+          refElem={this.agree}
           onChange={(e) => this.onChangeHandle(e)}
         />
         <button
           data-testid="button-submit-form"
           type="submit"
           className="form__btn-submit"
-          onSubmit={this.onSubmit}
           disabled={
             firstNameError ||
             lastNameError ||
