@@ -140,7 +140,6 @@ class UncontrolledForm extends React.Component<IProps, IState> {
         agreeErrorText: '',
       });
     }
-    console.log('validFirstName: ', validFirstName);
     if (
       validFirstName &&
       validLastName &&

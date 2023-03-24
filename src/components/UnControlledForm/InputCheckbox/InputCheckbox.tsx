@@ -1,7 +1,6 @@
 import { Component } from 'react';
 
 type IProps = {
-  /*   error?: boolean; */
   errorText?: string;
   refElem: React.RefObject<HTMLInputElement>;
 };
