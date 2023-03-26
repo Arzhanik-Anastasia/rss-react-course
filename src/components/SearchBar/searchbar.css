@@ -1,0 +1,27 @@
+.search__bar {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.search__bar-icon {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 10px;
+    background: url('./../../../png/search.png');
+}
+
+#input {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 16px;
+    background: linear-gradient(0deg, #f6f6f6, #f6f6f6), #fefefe;
+    border: 1px solid #e2e2e2;
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 9px 9px 10px 35px;
+    outline: none;
+    width: 100%;
+    margin: 50px auto;
+}

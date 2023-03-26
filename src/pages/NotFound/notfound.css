@@ -1,0 +1,22 @@
+.wrapper__notfound {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  margin-top: 100px;
+}
+.title {
+  font-size: 64px;
+  font-style: italic;
+}
+.wrapper__notfound p {
+  margin-bottom: 50px;
+  font-style: italic;
+  font-size: 40px;
+}
+.notfound__link {
+  height: 50px;
+  padding: 10px 30px;
+  background-color: brown;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
