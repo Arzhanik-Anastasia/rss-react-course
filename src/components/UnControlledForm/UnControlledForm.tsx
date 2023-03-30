@@ -15,7 +15,7 @@ type IProps = {
     birthDay: string,
     country: string,
     news: boolean,
-    avatar: FileList,
+    avatar: File,
     check: boolean
   ) => void;
 };
@@ -38,7 +38,7 @@ const Form = ({ onAddCard }: IProps) => {
       data.birthDay,
       data.country,
       data.news,
-      data.avatar,
+      data.avatar?.[0],
       data.check
     );
     reset();

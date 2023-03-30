@@ -9,18 +9,23 @@ export type IData = {
   liked: boolean;
 };
 
-export type IFormValue = {
+interface IForm {
   firstName: string;
   lastName: string;
   zipCode: string;
   birthDay: string;
   country: string;
   news: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  /*   avatar: any; */
-  avatar: FileList;
   check: boolean;
-};
+}
+
+export interface IFormValue extends IForm {
+  avatar: FileList;
+}
+
+export interface ICardForm extends IForm {
+  avatar: File;
+}
 
 export type IPropsSearchBar = {
   onUpdateSearchBar: (search: string) => void;
