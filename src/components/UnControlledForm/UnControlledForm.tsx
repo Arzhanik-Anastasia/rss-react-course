@@ -1,24 +1,11 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import './unConrolledForm.css';
-import React from 'react';
-import Input from './Input/Input';
 import Switcher from './Switcher/Switcher';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { IFormValue } from '../../types/interfaces';
+import { checkedDate, getToday } from '../../utils/helpers';
 import InputFile from './InputFile/InputFile';
-
-type IState = {
-  firstNameError: boolean;
-  firstNameErrorText: string;
-  lastNameError: boolean;
-  lastNameErrorText: string;
-  zipCodeError: boolean;
-  zipCodeErrorText: string;
-  birthDayError: boolean;
-  birthDayErrorText: string;
-  photoError: boolean;
-  photoErrorText: string;
-  agreeError: boolean;
-  agreeErrorText: string;
-};
+import Input from './Input/Input';
+import './InputFile/inputFile.css';
+import './unConrolledForm.css';
 
 type IProps = {
   onAddCard: (
@@ -28,265 +15,104 @@ type IProps = {
     birthDay: string,
     country: string,
     news: boolean,
-    photo: File,
-    agree: boolean
+    avatar: FileList,
+    check: boolean
   ) => void;
 };
 
-class UncontrolledForm extends React.Component<IProps, IState> {
-  firstName = React.createRef<HTMLInputElement>();
-  lastName = React.createRef<HTMLInputElement>();
-  zipCode = React.createRef<HTMLInputElement>();
-  birthDay = React.createRef<HTMLInputElement>();
-  country = React.createRef<HTMLSelectElement>();
-  news = React.createRef<HTMLInputElement>();
-  photo = React.createRef<HTMLInputElement>();
-  agree = React.createRef<HTMLInputElement>();
-  form = React.createRef<HTMLFormElement>();
-  state = {
-    firstNameError: true,
-    firstNameErrorText: '',
-    lastNameError: true,
-    lastNameErrorText: '',
-    zipCodeError: true,
-    zipCodeErrorText: '',
-    birthDayError: true,
-    birthDayErrorText: '',
-    photoError: true,
-    photoErrorText: '',
-    modal: true,
-    agreeError: true,
-    agreeErrorText: '',
-  };
+const Form = ({ onAddCard }: IProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFormValue>({
+    mode: 'onSubmit',
+  });
 
-  onSubmit = (e: { preventDefault: () => void }) => {
-    const { onAddCard } = this.props;
-    e.preventDefault();
-    this.setState({
-      firstNameError: true,
-      lastNameError: true,
-      zipCodeError: true,
-      birthDayError: true,
-      photoError: true,
-      agreeError: true,
-    });
+  const onSubmit: SubmitHandler<IFormValue> = (data) => {
     onAddCard(
-      this.firstName.current!.value,
-      this.lastName.current!.value,
-      this.zipCode.current!.value,
-      this.birthDay.current!.value,
-      this.country.current!.value,
-      this.news.current!.checked,
-      this.photo.current!.files![0],
-      this.agree.current!.checked
+      data.firstName,
+      data.lastName,
+      data.zipCode,
+      data.birthDay,
+      data.country,
+      data.news,
+      data.avatar,
+      data.check
     );
-    this.firstName.current!.value = '';
-    this.lastName.current!.value = '';
-    this.zipCode.current!.value = '';
-    this.birthDay.current!.value = '';
-    this.country.current!.value = 'Belarus';
-    this.news.current!.checked = false;
-    this.photo.current!.value = '';
-    this.agree.current!.checked = false;
+    reset();
   };
 
-  onChangeHandle(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    switch (e.target.name) {
-      case 'firstName':
-        if (this.firstName.current!.value.length >= 3) {
-          this.setState({
-            firstNameError: false,
-            firstNameErrorText: '',
-          });
-        } else {
-          this.setState({
-            firstNameError: true,
-            firstNameErrorText: 'Слишком короткое имя',
-          });
-        }
-        break;
-      case 'lastName':
-        if (this.lastName.current!.value.length >= 3) {
-          this.setState({ lastNameError: false, lastNameErrorText: '' });
-        } else {
-          this.setState({
-            lastNameError: true,
-            lastNameErrorText: 'Слишком короткое имя',
-          });
-        }
-        break;
-      case 'zipcode':
-        if (this.zipCode.current!.value.length >= 6) {
-          this.setState({ zipCodeError: false, zipCodeErrorText: '' });
-        } else {
-          this.setState({
-            zipCodeError: true,
-            zipCodeErrorText: 'Минимальное количество символов - 6',
-          });
-        }
-        break;
-      case 'birthDay':
-        const checked = this.checkedDate(this.birthDay.current!.value);
-        if (this.birthDay.current!.value && checked) {
-          this.setState({ birthDayError: false, birthDayErrorText: '' });
-        } else {
-          this.setState({
-            birthDayError: true,
-            birthDayErrorText: 'Только пользователи старше 18 лет',
-          });
-        }
-        break;
-      case 'avatar':
-        if (this.photo.current!.files![0]) {
-          this.setState({ photoError: false, photoErrorText: '' });
-        } else {
-          this.setState({
-            photoError: true,
-            photoErrorText: 'Выберите фото',
-          });
-        }
-        break;
-      case 'check':
-        if (!this.agree.current?.checked) {
-          this.setState({
-            agreeError: true,
-            agreeErrorText: 'Необходимо Ваше согласие',
-          });
-        } else {
-          this.setState({
-            agreeError: false,
-          });
-        }
-        break;
-    }
-  }
+  return (
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <Input
+        register={register('firstName', {
+          required: 'Поле обязательно к заполнению',
+          minLength: { value: 3, message: 'Слишком короткое имя' },
+        })}
+        nameInput={'firstName'}
+        textLabel={'First Name'}
+        datatestId={'input-firstName'}
+        type={'text'}
+        errors={errors}
+      />
+      <Input
+        register={register('lastName', {
+          required: 'Поле обязательно к заполнению',
+          minLength: { value: 3, message: 'Слишком короткое имя' },
+        })}
+        nameInput={'lastName'}
+        textLabel={'Last Name'}
+        datatestId={'input-lastName'}
+        type={'text'}
+        errors={errors}
+      />
+      <Input
+        register={register('zipCode', {
+          required: 'Поле обязательно к заполнению',
+          minLength: { value: 6, message: 'Минимальное количество символов - 6' },
+        })}
+        nameInput={'zipCode'}
+        textLabel={'Zip Code'}
+        datatestId={'input-zipcode'}
+        type={'number'}
+        errors={errors}
+      />
+      <Input
+        register={register('birthDay', {
+          required: 'Поле обязательно к заполнению',
+          validate: (input) => checkedDate(input) === true,
+        })}
+        nameInput={'birthDay'}
+        textLabel={'Birth Day'}
+        datatestId={'input-birthDay'}
+        type={'date'}
+        errors={errors}
+        max={getToday()}
+      />
+      <select {...register('country')}>
+        <option value="Belarus">Беларусь</option>
+        <option value="Ukraine">Украина</option>
+        <option value="Latvia">Латвия</option>
+      </select>
+      <Switcher register={register('news')} />
+      <InputFile register={register('avatar', { required: 'Необходимо фото' })} errors={errors} />
+      <Input
+        nameInput="check"
+        textLabel="Согласие на обработку данных"
+        register={register('check', { required: 'Необходимо Ваше согласие' })}
+        type="checkbox"
+        datatestId="input-checkbox"
+        errors={errors}
+        className={'input-checkbox'}
+        classNameLabel={'checkbox-label'}
+      />
+      <button data-testid="button-submit-form" className="form__btn-submit">
+        Отправить
+      </button>
+    </form>
+  );
+};
 
-  checkedDate = (value: string): boolean => {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const dob = new Date(value);
-    const dobnow = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
-    let age = today.getFullYear() - dob.getFullYear();
-    if (today < dobnow) {
-      age = age - 1;
-    }
-    return age >= 18 ? true : false;
-  };
-
-  getToday(): string {
-    const today = new Date();
-    return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
-      today.getDate()
-    ).padStart(2, '0')}`;
-  }
-
-  render() {
-    const {
-      firstNameError,
-      firstNameErrorText,
-      lastNameError,
-      lastNameErrorText,
-      zipCodeError,
-      zipCodeErrorText,
-      birthDayError,
-      birthDayErrorText,
-      photoError,
-      photoErrorText,
-      agreeError,
-      agreeErrorText,
-    } = this.state;
-    return (
-      <form className="form" onSubmit={this.onSubmit} ref={this.form}>
-        <Input
-          nameInput={'firstName'}
-          textLabel={'First Name'}
-          type={'text'}
-          error={firstNameError}
-          errorText={firstNameErrorText}
-          refElem={this.firstName}
-          datatestId="input-firstName"
-          onChange={(e) => this.onChangeHandle(e)}
-        />
-        <Input
-          nameInput={'lastName'}
-          textLabel={'Last Name'}
-          type={'text'}
-          error={lastNameError}
-          errorText={lastNameErrorText}
-          refElem={this.lastName}
-          datatestId="input-lastName"
-          onChange={(e) => this.onChangeHandle(e)}
-        />
-        <Input
-          nameInput={'zipcode'}
-          textLabel={'Zip Code'}
-          type={'number'}
-          error={zipCodeError}
-          errorText={zipCodeErrorText}
-          refElem={this.zipCode}
-          datatestId="input-zipcode"
-          onChange={(e) => this.onChangeHandle(e)}
-        />
-        <Input
-          nameInput={'birthDay'}
-          textLabel={'Birth Day'}
-          type={'date'}
-          refElem={this.birthDay}
-          error={birthDayError}
-          errorText={birthDayErrorText}
-          max={this.getToday()}
-          datatestId="input-birthDay"
-          onChange={(e) => this.onChangeHandle(e)}
-        />
-        <select name="country" ref={this.country}>
-          <option value="Belarus">Беларусь</option>
-          <option value="Ukraine">Украина</option>
-          <option value="Latvia">Латвия</option>
-        </select>
-        <Switcher refElem={this.news} />
-        <InputFile
-          nameInput="avatar"
-          textLabel={
-            this.photo.current && this.photo.current!.files![0]
-              ? 'Файл загружен'
-              : 'Выберите аватар'
-          }
-          type="file"
-          refElem={this.photo}
-          error={photoError}
-          errorText={photoErrorText}
-          datatestId="input-avatar"
-          onChange={(e) => this.onChangeHandle(e)}
-        />
-        <Input
-          nameInput="check"
-          textLabel="Согласие на обработку данных"
-          refElem={this.agree}
-          type="checkbox"
-          datatestId="input-checkbox"
-          error={agreeError}
-          errorText={agreeErrorText}
-          onChange={(e) => this.onChangeHandle(e)}
-        />
-        <button
-          data-testid="button-submit-form"
-          type="submit"
-          className="form__btn-submit"
-          onSubmit={this.onSubmit}
-          disabled={
-            firstNameError ||
-            lastNameError ||
-            zipCodeError ||
-            birthDayError ||
-            photoError ||
-            agreeError
-          }
-        >
-          Submit
-        </button>
-      </form>
-    );
-  }
-}
-
-export default UncontrolledForm;
+export default Form;

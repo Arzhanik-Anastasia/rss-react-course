@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import { useEffect, useState } from 'react';
+import { IPropsSearchBar } from 'types/interfaces';
 
 import './searchbar.css';
 
-type IProps = {
-  onUpdateSearchBar: (term: string) => void;
-  term: string;
-};
+const SearchBar = ({ onUpdateSearchBar, search }: IPropsSearchBar) => {
+  const [searchString, setSearch] = useState(search);
 
-class SearchBar extends Component<IProps> {
-  updateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.onUpdateSearchBar(e.target.value);
-  };
-
-  componentWillUnmount() {
-    const { term } = this.props;
-    localStorage.setItem('search', term);
-  }
-
-  render() {
-    const { term } = this.props;
-    return (
+  useEffect(() => {
+    return localStorage.setItem('search', search);
+  });
+  return (
+    <form
+      className="search-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onUpdateSearchBar(searchString);
+      }}
+    >
       <div className="search__bar">
         <div className="search__bar-icon"></div>
         <input
@@ -28,12 +25,24 @@ class SearchBar extends Component<IProps> {
           type="text"
           data-testid="search-input"
           placeholder="Search"
-          onInput={this.updateChange}
-          value={term}
+          value={searchString}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-    );
-  }
-}
+      <button
+        className="button-search"
+        data-testid="btn-search"
+        onClick={() => {
+          onUpdateSearchBar(searchString);
+        }}
+      >
+        <svg>
+          <rect x="0" y="0" fill="none" width="100%" height="100%" />
+        </svg>
+        Search
+      </button>
+    </form>
+  );
+};
 
 export default SearchBar;

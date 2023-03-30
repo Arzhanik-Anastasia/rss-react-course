@@ -1,53 +1,34 @@
+import { FieldErrors, FieldValues, UseFormRegisterReturn } from 'react-hook-form';
 import './inputFile.css';
 
 type IProps = {
-  className?: string;
-  nameInput: string;
-  textLabel: string;
-  type: string;
-  error?: boolean;
-  errorText?: string;
-  refElem: React.RefObject<HTMLInputElement>;
-  datatestId: string;
-  max?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  register: UseFormRegisterReturn;
+  errors: FieldErrors<FieldValues>;
 };
 
-const InputFile = ({
-  nameInput,
-  textLabel,
-  type,
-  error,
-  errorText,
-  refElem,
-  onChange,
-  datatestId,
-  max,
-}: IProps) => {
+const InputFile = ({ register, errors }: IProps) => {
   return (
     <div className="wraper-input-file">
-      <label htmlFor={nameInput} className="label-input-file">
+      <label htmlFor="avatar" className="label-input-file">
         <span className="icon-file">
           <img src="./../svg/icon-file.svg" alt="icon-file" />
         </span>
         <p className="file-text">
-          {textLabel}
-          {error ? (
+          {errors?.avatar?.message ? (
             <span className="error-span" data-testid="error" style={{ color: 'red' }}>
-              {errorText}
+              {errors?.avatar?.message?.toString()}
             </span>
           ) : (
-            ''
+            'Выберите аватар'
           )}
         </p>
+
         <input
+          {...register}
           className="input-file"
-          type={type}
-          name={nameInput}
-          ref={refElem}
-          data-testid={datatestId}
-          onChange={onChange}
-          max={max}
+          type="file"
+          name="avatar"
+          data-testid="input-avatar"
         />
       </label>
     </div>

@@ -1,15 +1,16 @@
+import { UseFormRegisterReturn } from 'react-hook-form';
 import './switcher.css';
 
 type IProps = {
-  refElem: React.RefObject<HTMLInputElement>;
+  register: UseFormRegisterReturn;
 };
 
-const Switcher = ({ refElem }: IProps) => {
+const Switcher = ({ register }: IProps) => {
   return (
     <>
       <div className="switcher-text">Получать уведомления</div>
       <label className="switch">
-        <input type="checkbox" ref={refElem} data-testid="input-switcher" />
+        <input type="checkbox" data-testid="input-switcher" {...register} />
         <span className="slider round"></span>
       </label>
     </>

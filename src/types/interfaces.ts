@@ -16,5 +16,13 @@ export type IFormValue = {
   birthDay: string;
   country: string;
   news: boolean;
-  avatar: File;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  /*   avatar: any; */
+  avatar: FileList;
+  check: boolean;
+};
+
+export type IPropsSearchBar = {
+  onUpdateSearchBar: (search: string) => void;
+  search: string;
 };
