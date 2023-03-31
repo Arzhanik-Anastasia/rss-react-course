@@ -6,8 +6,8 @@ import SearchBar from './SearchBar';
 describe('SearchBar', () => {
   it('render SearchBar', () => {
     const onUpdateSearchBar = vi.fn();
-    const term = '';
-    render(<SearchBar onUpdateSearchBar={onUpdateSearchBar} term={term} />);
+    const search = '';
+    render(<SearchBar onUpdateSearchBar={onUpdateSearchBar} search={search} />);
     expect(screen.getByPlaceholderText(/Search/i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(screen.getByDisplayValue('')).toBeInTheDocument();
@@ -15,8 +15,8 @@ describe('SearchBar', () => {
 
   it('input focus', () => {
     const onUpdateSearchBar = vi.fn();
-    const term = 'Hello';
-    render(<SearchBar onUpdateSearchBar={onUpdateSearchBar} term={term} />);
+    const search = 'Hello';
+    render(<SearchBar onUpdateSearchBar={onUpdateSearchBar} search={search} />);
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).not.toHaveFocus();
     inputElement.focus();
@@ -25,10 +25,13 @@ describe('SearchBar', () => {
 
   it('change input value', async () => {
     const onUpdateSearchBar = vi.fn();
-    const term = 'Hello';
-    render(<SearchBar onUpdateSearchBar={onUpdateSearchBar} term={term} />);
+    const user = userEvent.setup();
+    const search = 'Hello';
+    render(<SearchBar onUpdateSearchBar={onUpdateSearchBar} search={search} />);
     const inputElement = screen.getByTestId('search-input');
     await userEvent.type(inputElement, 'Hello');
-    expect(onUpdateSearchBar).toHaveBeenCalledTimes(5);
+    const btnSearch = screen.getByTestId('btn-search');
+    await user.click(btnSearch);
+    expect(onUpdateSearchBar).toHaveBeenCalledTimes(2);
   });
 });

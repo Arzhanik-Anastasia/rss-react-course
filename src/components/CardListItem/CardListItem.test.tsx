@@ -1,6 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
 import CardListItem from './CardListItem';
 
 describe('CardItem', (): void => {
@@ -17,7 +15,6 @@ describe('CardItem', (): void => {
 
   it('render card with Fakedata', () => {
     const { id, title, author, description, img, seeCount, likedCount, liked } = fakeData;
-    const onLiked = vi.fn();
     render(
       <CardListItem
         id={id}
@@ -28,7 +25,6 @@ describe('CardItem', (): void => {
         likedCount={likedCount}
         seeCount={seeCount}
         liked={liked}
-        onLiked={onLiked}
       />
     );
     expect(screen.getByRole('heading')).toBeInTheDocument();
@@ -42,10 +38,8 @@ describe('CardItem', (): void => {
 
   it('render card with like true', async () => {
     const { id, title, author, description, img, seeCount, likedCount } = fakeData;
-    const onLiked = vi.fn();
-    const user = userEvent.setup();
     const like = true;
-    const { container, getByTestId } = render(
+    const { getByTestId } = render(
       <CardListItem
         id={id}
         title={title}
@@ -55,11 +49,8 @@ describe('CardItem', (): void => {
         likedCount={likedCount}
         seeCount={seeCount}
         liked={like}
-        onLiked={onLiked}
       />
     );
     expect(getByTestId('like-btn')).toHaveClass('icon-like-active');
-    await user.click(getByTestId('like-btn'));
-    expect(container.innerHTML).toMatch((likedCount + 1).toString());
   });
 });
