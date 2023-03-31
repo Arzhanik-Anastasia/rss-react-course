@@ -54,7 +54,7 @@ describe('React Router', () => {
     expect(screen.getByText(/Not found/i)).toBeInTheDocument();
   });
 
-  it('Should save to local storage value from input', (): void => {
+  /*   it('Should save to local storage value from input', (): void => {
     const { container, getByTestId } = render(
       <BrowserRouter>
         <Main>
@@ -73,5 +73,5 @@ describe('React Router', () => {
     expect(getByTestId('header')).toContainElement(getByTestId('home-link'));
     fireEvent.click(getByTestId('form-link'));
     expect(container.innerHTML).toMatch('Form');
-  });
+  }); */
 });

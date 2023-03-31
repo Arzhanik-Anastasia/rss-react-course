@@ -49,7 +49,7 @@ const Form = ({ onAddCard }: IProps) => {
       <Input
         register={register('firstName', {
           required: 'Поле обязательно к заполнению',
-          minLength: { value: 3, message: 'Слишком короткое имя' },
+          minLength: { value: 2, message: 'Слишком короткое имя' },
         })}
         nameInput={'firstName'}
         textLabel={'First Name'}
@@ -60,7 +60,7 @@ const Form = ({ onAddCard }: IProps) => {
       <Input
         register={register('lastName', {
           required: 'Поле обязательно к заполнению',
-          minLength: { value: 3, message: 'Слишком короткое имя' },
+          minLength: { value: 2, message: 'Слишком короткая фамилия' },
         })}
         nameInput={'lastName'}
         textLabel={'Last Name'}

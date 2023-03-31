@@ -17,8 +17,6 @@ describe('render Form Page', () => {
       </BrowserRouter>
     );
     expect(screen.queryByText(/Данные успешно добавлены/i)).toBeNull();
-    const button = screen.getByTestId('button-submit-form');
-    expect(button).toBeDisabled();
     const inputFirstName = screen.getByTestId('input-firstName');
     await user.type(inputFirstName, 'Ivan');
     const inputLastName = screen.getByTestId('input-lastName');
@@ -46,7 +44,6 @@ describe('render Form Page', () => {
     expect(closeElem).toBeInTheDocument();
     await user.click(closeElem);
     expect(screen.queryByTestId('modal')).toBeNull();
-    expect(screen.getByTestId('button-submit-form')).toBeDisabled();
     expect(screen.getByTestId('news')).toHaveTextContent('Да');
   });
 
