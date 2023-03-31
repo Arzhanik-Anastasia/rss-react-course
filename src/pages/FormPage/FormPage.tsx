@@ -3,11 +3,11 @@ import CardForm from '../../components/CardForm/CardForm';
 import Header from '../../components/Header/Header';
 import Modal from '../../components/UnControlledForm/Modal/Modal';
 import UnControlledForm from '../../components/UnControlledForm/UnControlledForm';
-import { IFormValue } from '../../types/interfaces';
+import { ICardForm } from '../../types/interfaces';
 import './formPage.css';
 
 const FormPage = () => {
-  const [formValue, setFormValue] = useState<IFormValue[] | []>([]);
+  const [formValue, setFormValue] = useState<ICardForm[] | []>([]);
   const [modal, setOpenModal] = useState(false);
 
   const onAddCard = (
@@ -17,7 +17,7 @@ const FormPage = () => {
     birthDay: string,
     country: string,
     news: boolean,
-    avatar: FileList,
+    avatar: File,
     check: boolean
   ) => {
     const newArr = [
