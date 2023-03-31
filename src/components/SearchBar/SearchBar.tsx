@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IPropsSearchBar } from 'types/interfaces';
+import { IPropsSearchBar } from './../../types/interfaces';
 
 import './searchbar.css';
 
