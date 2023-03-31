@@ -4,6 +4,7 @@
   padding: 20px;
   background-color: #94e1ff;
   border-radius: 20px;
+  color: black;
 }
 
 .form input,
@@ -34,6 +35,10 @@
 .input-checkbox {
   margin: 10px;
   display: block;
+}
+
+.input__checkbox {
+  width: 5%;
 }
 .error-span {
   margin-left: 20px;
