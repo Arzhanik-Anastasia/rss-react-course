@@ -6,7 +6,6 @@ import './cardList.css';
 type IProps = {
   term: string;
   data: IData[];
-  onLiked: (id: number) => void;
 };
 
 class CardList extends Component<IProps> {
@@ -24,7 +23,7 @@ class CardList extends Component<IProps> {
     const visibleData = this.searchCard(data, term);
     const elements = visibleData.map((item: IData) => {
       const { id } = item;
-      return <CardListItem key={id} {...item} onLiked={() => this.props.onLiked(id)} />;
+      return <CardListItem key={id} {...item} />;
     });
     return <ul className="card__list"> {elements}</ul>;
   }
