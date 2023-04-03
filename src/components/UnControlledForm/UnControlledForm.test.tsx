@@ -62,9 +62,6 @@ describe('Form', () => {
     await user.type(inputBirthDay, '2000-04-22');
     await user.click(btnSubmit);
     expect(screen.queryByText(/Только старше 18 лет/i)).toBeNull();
-    /* await user.type(inputBirthDay, '2022-04-22');
-    await user.click(btnSubmit);
-    expect(screen.queryByText(/Только старше 18 лет/i)).toBeInTheDocument(); */
   });
 
   it('test country Select', () => {
