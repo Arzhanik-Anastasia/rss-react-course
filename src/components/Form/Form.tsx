@@ -5,7 +5,7 @@ import { checkedDate, getToday } from '../../utils/helpers';
 import InputFile from './InputFile/InputFile';
 import Input from './Input/Input';
 import './InputFile/inputFile.css';
-import './unConrolledForm.css';
+import './form.css';
 
 type IProps = {
   onAddCard: (

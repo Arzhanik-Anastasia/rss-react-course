@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
-import UncontrolledForm from './UnControlledForm';
+import Form from './Form';
 
 describe('Form', () => {
   it('test firstName Input', async () => {
     const onAddCard = vi.fn();
     const user = userEvent.setup();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
     const inputFirstName = screen.getByTestId('input-firstName');
     expect(inputFirstName).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('Form', () => {
 
   it('test lastName Input', async () => {
     const onAddCard = vi.fn();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
     const user = userEvent.setup();
     const inputLastName = screen.getByTestId('input-lastName');
@@ -39,7 +39,7 @@ describe('Form', () => {
   it('test zipCode Input', async () => {
     const onAddCard = vi.fn();
     const user = userEvent.setup();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
     const inputZipCode = screen.getByTestId('input-zipcode');
     expect(inputZipCode).toBeInTheDocument();
@@ -55,28 +55,25 @@ describe('Form', () => {
   it('test birthDay Input', async () => {
     const onAddCard = vi.fn();
     const user = userEvent.setup();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
     const inputBirthDay = screen.getByTestId('input-birthDay');
     expect(inputBirthDay).toBeInTheDocument();
     await user.type(inputBirthDay, '2000-04-22');
     await user.click(btnSubmit);
     expect(screen.queryByText(/Только старше 18 лет/i)).toBeNull();
-    /* await user.type(inputBirthDay, '2022-04-22');
-    await user.click(btnSubmit);
-    expect(screen.queryByText(/Только старше 18 лет/i)).toBeInTheDocument(); */
   });
 
   it('test country Select', () => {
     const onAddCard = vi.fn();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const combobox = screen.getByRole('combobox');
     expect(combobox).toBeInTheDocument();
   });
 
   it('renders all options', () => {
     const onAddCard = vi.fn();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const selectedOption = screen.getAllByRole('option');
     expect(selectedOption.length).toEqual(3);
   });
@@ -86,7 +83,7 @@ describe('Form', () => {
     window.URL.createObjectURL = vi.fn();
     const user = userEvent.setup();
     const file = new File(['hello'], 'hello.png', { type: 'image/png' });
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
     const inputFile = screen.getByTestId('input-avatar');
     expect(inputFile).toBeInTheDocument();
@@ -99,7 +96,7 @@ describe('Form', () => {
 
   it('test input checkBox switcher', async () => {
     const onAddCard = vi.fn();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const user = userEvent.setup();
     const inputSwitcher = screen.getByTestId('input-switcher') as HTMLInputElement;
     expect(inputSwitcher).toBeInTheDocument();
@@ -114,7 +111,7 @@ describe('Form', () => {
   it('test input checkBox agree', async () => {
     const onAddCard = vi.fn();
     const user = userEvent.setup();
-    render(<UncontrolledForm onAddCard={onAddCard} />);
+    render(<Form onAddCard={onAddCard} />);
     const inputCheckbox = screen.getByTestId('input-checkbox') as HTMLInputElement;
     const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
     expect(inputCheckbox).toBeInTheDocument();
