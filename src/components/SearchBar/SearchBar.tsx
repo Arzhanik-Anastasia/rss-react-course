@@ -1,14 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IPropsSearchBar } from './../../types/interfaces';
 
 import './searchbar.css';
 
 const SearchBar = ({ onUpdateSearchBar, search }: IPropsSearchBar) => {
   const [searchString, setSearch] = useState(search);
+  const searchRef = useRef<string>();
 
   useEffect(() => {
-    return localStorage.setItem('search', search);
-  });
+    searchRef.current = searchString;
+  }, [searchString]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('search', searchRef.current || '');
+    };
+  }, []);
+
   return (
     <form
       className="search-form"

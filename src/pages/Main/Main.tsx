@@ -7,7 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import data from '../../data';
 
 const Main = () => {
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>(localStorage.getItem('search') || '');
 
   const onUpdateSearchBar = (search: string) => {
     setSearch(search);
