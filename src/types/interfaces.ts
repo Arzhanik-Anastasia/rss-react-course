@@ -1,12 +1,30 @@
-export type IData = {
-  id: number;
+export type IPropsMovieList = {
+  search: string;
+  movies: IMovies;
+};
+
+export type IMovies = {
+  page: number;
+  results: IMovie[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type IMovie = {
+  adult?: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: string;
+  original_language?: string;
+  original_title?: string;
+  overview: string;
+  popularity?: number;
+  poster_path?: string;
+  release_date: string;
   title: string;
-  author: string;
-  img: string;
-  description: string;
-  likedCount: number;
-  seeCount: number;
-  liked: boolean;
+  video?: boolean;
+  vote_average: number;
+  vote_count: number;
 };
 
 interface IForm {

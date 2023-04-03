@@ -1,0 +1,35 @@
+  .modal-info {
+    position: fixed;
+    top: 50%;
+    left: -100%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    height: 600px;
+    align-items: center;
+    padding: 50px 140px;
+    overflow: auto;
+    flex-wrap: wrap;
+    left: 50%;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+
+  .modal-info-title {
+  text-align: center;
+  }
+
+  .modal-info-desc {
+    font-size: 12px;
+  }
+
+  .modal-info-release{
+    font-size: 12px; 
+    margin: 20px 0;
+  }
+
+  .modal-info .close-modal {
+    right: 30px;
+    top: 10px;
+  }
