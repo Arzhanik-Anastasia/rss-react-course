@@ -12,7 +12,7 @@ const MovieListItem = ({ item }: IPropsMovieListItem) => {
   const [isOpenModal, toggleModal] = useState(false);
   const imgSrc = item.poster_path
     ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-    : './public/png/no-photo.png';
+    : './png/no-photo.png';
   return (
     <>
       <div

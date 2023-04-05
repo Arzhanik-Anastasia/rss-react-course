@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import CardForm from '../../components/CardForm/CardForm';
 import Header from '../../components/Header/Header';
-import Modal from '../../components/UnControlledForm/Modal/Modal';
-import UnControlledForm from '../../components/UnControlledForm/UnControlledForm';
+import Modal from '../../components/Form/Modal/Modal';
+import Form from '../../components/Form/Form';
 import { ICardForm } from '../../types/interfaces';
 import './formPage.css';
 
@@ -37,7 +37,7 @@ const FormPage = () => {
       <div className="form__page">
         <Header />
         <h2 className="formpage__title">Form Page</h2>
-        <UnControlledForm onAddCard={onAddCard} />
+        <Form onAddCard={onAddCard} />
         <ul className="card__list-form">{elements}</ul>
       </div>
       {modal ? <div className="overlay"></div> : ''}

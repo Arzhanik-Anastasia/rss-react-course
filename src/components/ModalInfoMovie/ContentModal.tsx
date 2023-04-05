@@ -22,7 +22,7 @@ const Content = ({
   console.log(vote_average.toFixed(2));
   const img = backdrop_path
     ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
-    : './public/png/no-photo.png';
+    : './png/no-photo.png';
   return (
     <div className="modal-info" data-testid="modal-info">
       <div className="movie-img">
