@@ -13,7 +13,7 @@
   width: 12px;
   height: 12px;
   left: 10px;
-  background: url('./../../../public/png/search.png');
+  background: url('./../../../png/search.png');
 }
 #input {
   font-family: 'Roboto';
