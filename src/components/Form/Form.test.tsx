@@ -62,6 +62,19 @@ describe('Form', () => {
     await user.type(inputBirthDay, '2000-04-22');
     await user.click(btnSubmit);
     expect(screen.queryByText(/Только старше 18 лет/i)).toBeNull();
+    await user.type(inputBirthDay, '2023-04-22');
+    await user.click(btnSubmit);
+  });
+
+  it('test birthDay Input2', async () => {
+    const onAddCard = vi.fn();
+    const user = userEvent.setup();
+    render(<Form onAddCard={onAddCard} />);
+    const btnSubmit = screen.getByTestId('button-submit-form') as HTMLButtonElement;
+    const inputBirthDay = screen.getByTestId('input-birthDay');
+    await user.type(inputBirthDay, '2023-03-22');
+    await user.click(btnSubmit);
+    expect(screen.queryByText(/Только старше 18 лет/i)).toBeInTheDocument();
   });
 
   it('test country Select', () => {

@@ -52,7 +52,6 @@ const Main = () => {
       <Header />
       <h2 data-testid="home-page">Home page</h2>
       <SearchBar onUpdateSearchBar={onUpdateSearchBar} search={search} />
-      {/* <CardList search={search} data={data} /> */}
       <div className="content-main">
         {error ? <ErrorMessage /> : null}
         {isLoading ? <Loader /> : null}
