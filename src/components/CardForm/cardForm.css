@@ -21,6 +21,7 @@
 .user__info p {
   font-size: 16px;
   font-weight: 300;
+  word-wrap: break-word;
 }
 
 .user__avatar img {

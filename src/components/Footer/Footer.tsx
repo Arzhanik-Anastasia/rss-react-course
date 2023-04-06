@@ -16,7 +16,7 @@ const Footer = () => {
         {info.year} {info.name}
       </div>
       <a href={info.pathGithube}>
-        <img src="./../png/github.png" alt="logo githube" width="50" height="50" />
+        <img src="./../svg/github.svg" alt="logo githube" width="50" height="50" />
       </a>
     </footer>
   );

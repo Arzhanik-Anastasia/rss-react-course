@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import CardForm from '../../components/CardForm/CardForm';
-import Header from '../../components/Header/Header';
 import Modal from '../../components/Form/Modal/Modal';
 import Form from '../../components/Form/Form';
 import { ICardForm } from '../../types/interfaces';
@@ -35,7 +34,6 @@ const FormPage = () => {
   return (
     <>
       <div className="form__page">
-        <Header />
         <h2 className="formpage__title">Form Page</h2>
         <Form onAddCard={onAddCard} />
         <ul className="card__list-form">{elements}</ul>

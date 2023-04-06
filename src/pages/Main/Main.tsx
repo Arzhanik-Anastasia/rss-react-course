@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import Header from '../../components/Header/Header';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import Footer from '../../components/Footer/Footer';
 import ErrorMessage from './../../components/ErrorMessage/ErrorMessage';
 import Loader from './../../components/Loader/Loader';
 import MovieList from './../../components/MovieList/MovieList';
@@ -49,7 +47,6 @@ const Main = () => {
 
   return (
     <div className="app">
-      <Header />
       <h2 data-testid="home-page">Home page</h2>
       <SearchBar onUpdateSearchBar={onUpdateSearchBar} search={search} />
       <div className="content-main">
@@ -57,7 +54,6 @@ const Main = () => {
         {isLoading ? <Loader /> : null}
         {!(isLoading || error) ? <MovieList movies={movies} search={search} /> : null}
       </div>
-      <Footer />
     </div>
   );
 };
