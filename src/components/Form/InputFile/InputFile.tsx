@@ -29,6 +29,7 @@ const InputFile = ({ register, errors }: IProps) => {
           type="file"
           name="avatar"
           data-testid="input-avatar"
+          accept=".jpg, .jpeg, .png"
         />
       </label>
     </div>

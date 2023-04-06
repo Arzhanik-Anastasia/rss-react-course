@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -10,7 +9,7 @@ describe('render Form Page', () => {
   it('add Card', async () => {
     window.URL.createObjectURL = vi.fn();
     const user = userEvent.setup();
-    const file = new File(['hello'], 'hello.png', { type: 'image/png' });
+    const file = new File(['hello'], 'hello.jpg', { type: 'image/jpg' });
     render(
       <BrowserRouter>
         <FormPage />
@@ -27,7 +26,6 @@ describe('render Form Page', () => {
     await user.type(inputBirthDay, '2000-04-22');
     const inputFile = screen.getByTestId('input-avatar') as HTMLInputElement;
     await user.upload(inputFile, file);
-    expect(inputFile.files)!.toHaveLength(1);
     expect(inputFile.files![0]).toStrictEqual(file);
     expect(inputFile.files!.item(0)).toStrictEqual(file);
     expect(inputFile.files).toHaveLength(1);
@@ -49,7 +47,7 @@ describe('render Form Page', () => {
 
   it('add Card with news', async () => {
     window.URL.createObjectURL = vi.fn();
-    const file = new File(['hello'], 'hello.png', { type: 'image/png' });
+    const file = new File(['hello'], 'hello.jpg', { type: 'image/jpg' });
     const user = userEvent.setup();
     render(
       <BrowserRouter>

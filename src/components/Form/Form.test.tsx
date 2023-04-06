@@ -104,7 +104,7 @@ describe('Form', () => {
     expect(screen.queryByText(/Необходимо фото/i)).toBeInTheDocument();
     await user.upload(inputFile, file);
     await user.click(btnSubmit);
-    expect(screen.queryByText(/Необходимо фото/i)).toBeNull();
+    expect(screen.queryByText(/Выберите аватар/i)).toBeNull();
   });
 
   it('test input checkBox switcher', async () => {
