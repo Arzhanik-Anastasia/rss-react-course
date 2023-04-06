@@ -37,6 +37,19 @@ interface IForm {
   check: boolean;
 }
 
+export type IPropsForm = {
+  onAddCard: (
+    firstName: string,
+    lastName: string,
+    zipCode: string,
+    birthDay: string,
+    country: string,
+    news: boolean,
+    avatar: File,
+    check: boolean
+  ) => void;
+};
+
 export interface IFormValue extends IForm {
   avatar: FileList;
 }

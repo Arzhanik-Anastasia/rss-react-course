@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import About from './pages/About/About';
@@ -27,7 +28,7 @@ describe('React Router', () => {
     expect(header).toContainElement(link);
   });
 
-  it('should navigate to page', (): void => {
+  it('should navigate to page', async (): Promise<void> => {
     const { container, getByTestId } = render(
       <BrowserRouter>
         <Routes>
@@ -40,8 +41,11 @@ describe('React Router', () => {
         </Routes>
       </BrowserRouter>
     );
-    fireEvent.click(getByTestId('about-link'));
+    const user = userEvent.setup();
+    await user.click(getByTestId('about-link'));
     expect(container.innerHTML).toMatch('about');
+    await user.click(getByTestId('form-link'));
+    expect(container.innerHTML).toMatch('form');
   });
 
   it('should navigate to page not found', (): void => {

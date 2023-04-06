@@ -1,26 +1,13 @@
 import Switcher from './Switcher/Switcher';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IFormValue } from '../../types/interfaces';
+import { IFormValue, IPropsForm } from '../../types/interfaces';
 import { checkedDate, getToday } from '../../utils/helpers';
 import InputFile from './InputFile/InputFile';
 import Input from './Input/Input';
 import './InputFile/inputFile.css';
 import './form.css';
 
-type IProps = {
-  onAddCard: (
-    firstName: string,
-    lastName: string,
-    zipCode: string,
-    birthDay: string,
-    country: string,
-    news: boolean,
-    avatar: File,
-    check: boolean
-  ) => void;
-};
-
-const Form = ({ onAddCard }: IProps) => {
+const Form = ({ onAddCard }: IPropsForm) => {
   const {
     register,
     handleSubmit,
@@ -72,6 +59,7 @@ const Form = ({ onAddCard }: IProps) => {
         register={register('zipCode', {
           required: 'Поле обязательно к заполнению',
           minLength: { value: 6, message: 'Минимальное количество символов - 6' },
+          maxLength: { value: 10, message: 'Максимальное количество символов - 10' },
         })}
         nameInput={'zipCode'}
         textLabel={'Zip Code'}
