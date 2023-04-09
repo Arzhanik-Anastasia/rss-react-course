@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './modalInfoMovie.css';
 import Api from '../Api/Api';
-import { IMovie, IPropsModalInfoMovie } from '../../common/interfaces';
 import Content from './ContentModal';
+import { IMovie, IPropsModalInfoMovie } from './../../types/interfaces';
 
 const ModalInfoMovie = ({ id, onCloseModal }: IPropsModalInfoMovie) => {
   const [movie, setMovie] = useState<IMovie>({

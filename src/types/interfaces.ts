@@ -62,3 +62,8 @@ export type IPropsSearchBar = {
   onUpdateSearchBar: (search: string) => void;
   search: string;
 };
+
+export type IPropsModalInfoMovie = {
+  id: string;
+  onCloseModal: () => void;
+};
