@@ -19,7 +19,6 @@ const Content = ({
   vote_average,
   vote_count,
 }: IPropsContentModal) => {
-  console.log(vote_average.toFixed(2));
   const img = backdrop_path
     ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
     : './png/no-photo.png';
