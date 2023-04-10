@@ -7,19 +7,23 @@ import FormPage from './pages/FormPage/FormPage';
 import Main from './pages/Main/Main';
 import NotFound from './pages/NotFound/NotFound';
 import Layout from './components/Layout/Layout';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 describe('React Router', () => {
   it('should render Home Page', (): void => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Main />} />
-            <Route path="/form" element={<FormPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Main />} />
+              <Route path="/form" element={<FormPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Provider>
       </BrowserRouter>
     );
     const header = getByTestId('header');
@@ -31,14 +35,16 @@ describe('React Router', () => {
   it('should navigate to page', async (): Promise<void> => {
     const { container, getByTestId } = render(
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Main />} />
-            <Route path="/form" element={<FormPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Main />} />
+              <Route path="/form" element={<FormPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Provider>
       </BrowserRouter>
     );
     const user = userEvent.setup();
@@ -52,14 +58,16 @@ describe('React Router', () => {
     window.history.pushState({}, 'Not Found', '*');
     render(
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Main />} />
-            <Route path="/form" element={<FormPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Main />} />
+              <Route path="/form" element={<FormPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Provider>
       </BrowserRouter>
     );
     expect(screen.getByText(/Not found/i)).toBeInTheDocument();

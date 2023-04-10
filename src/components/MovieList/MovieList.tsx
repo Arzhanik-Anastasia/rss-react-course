@@ -3,6 +3,7 @@ import { IPropsMovieList } from './../../types/interfaces';
 import './movieList.css';
 
 const MovieList = ({ movies }: IPropsMovieList) => {
+  console.log('movies: ', movies);
   return (
     <ul className="movieslist" data-testid="movielist">
       {movies.results.map((movie) => {
