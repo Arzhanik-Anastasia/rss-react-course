@@ -1,17 +1,5 @@
-import { FieldErrors, FieldValues, UseFormRegisterReturn } from 'react-hook-form';
+import { IPropsInput } from './../../../types/interfaces';
 import './input.css';
-
-type IProps = {
-  register: UseFormRegisterReturn;
-  nameInput: string;
-  textLabel: string;
-  type: string;
-  datatestId: string;
-  errors: FieldErrors<FieldValues>;
-  max?: string;
-  className?: string;
-  classNameLabel?: string;
-};
 
 const Input = ({
   register,
@@ -23,7 +11,7 @@ const Input = ({
   max,
   className,
   classNameLabel,
-}: IProps) => {
+}: IPropsInput) => {
   return (
     <label htmlFor={nameInput} className={classNameLabel}>
       <p>
