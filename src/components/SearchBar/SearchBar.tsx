@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IPropsSearchBar } from './../../types/interfaces';
 
 import './searchbar.css';
@@ -6,9 +6,6 @@ import './searchbar.css';
 const SearchBar = ({ onUpdateSearchBar, search }: IPropsSearchBar) => {
   const [searchString, setSearch] = useState(search);
 
-  useEffect(() => {
-    return localStorage.setItem('search', search);
-  });
   return (
     <form
       className="search-form"

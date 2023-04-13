@@ -3,14 +3,14 @@ import ErrorMessage from './../../components/ErrorMessage/ErrorMessage';
 import Loader from './../../components/Loader/Loader';
 import MovieList from './../../components/MovieList/MovieList';
 import { useAppDispatch, useAppSelector } from './../../store/hooks';
-import { setSearch } from './../../reducer/movieReducer';
+import { setSearch } from '../../reducer/moviesReducer';
 import './main.css';
 import { getMovies } from './../../thunks/movie';
 import { useEffect } from 'react';
 
 const Main = () => {
   const dispatch = useAppDispatch();
-  const { search, isLoading, error, movies } = useAppSelector((state) => state.movieCard);
+  const { search, isLoading, error, movies } = useAppSelector((state) => state.moviesCard);
 
   const onUpdateSearchBar = (search: string) => {
     dispatch(setSearch(search));

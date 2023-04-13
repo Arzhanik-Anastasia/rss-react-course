@@ -1,52 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './modalInfoMovie.css';
-import Api from '../Api/Api';
 import Content from './ContentModal';
-import { IMovie, IPropsModalInfoMovie } from './../../types/interfaces';
+import { IPropsModalInfoMovie } from './../../types/interfaces';
+import { useAppDispatch, useAppSelector } from './../../store/hooks';
+import { getMovie } from './../../thunks/movie';
 
 const ModalInfoMovie = ({ id, onCloseModal }: IPropsModalInfoMovie) => {
-  const [movie, setMovie] = useState<IMovie>({
-    adult: false,
-    backdrop_path: '',
-    genre_ids: [],
-    id: '',
-    original_language: '',
-    original_title: '',
-    overview: '',
-    popularity: 0,
-    poster_path: '',
-    release_date: '',
-    title: '',
-    video: false,
-    vote_average: 0,
-    vote_count: 0,
-  });
-  const [isLoading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { movieInfo, isLoading, error } = useAppSelector((state) => state.movieCard);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const api = new Api();
-    api
-      .getFilmInfo(id)
-      .then((movie) => {
-        setMovie(movie);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
-  }, [id]);
+    dispatch(getMovie(id));
+  }, [dispatch, id]);
 
   const content = !(isLoading || error) ? (
     <Content
       onCloseModal={onCloseModal}
-      title={movie.title}
-      backdrop_path={movie.backdrop_path}
-      overview={movie.overview}
-      release_date={movie.release_date}
-      vote_average={movie.vote_average}
-      vote_count={movie.vote_count}
+      title={movieInfo.title}
+      backdrop_path={movieInfo.backdrop_path}
+      overview={movieInfo.overview}
+      release_date={movieInfo.release_date}
+      vote_average={movieInfo.vote_average}
+      vote_count={movieInfo.vote_count}
     />
   ) : null;
   return <>{content}</>;

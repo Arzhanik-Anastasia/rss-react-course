@@ -1,22 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getMovies } from './../thunks/movie';
-import { IMovies } from './../types/interfaces';
+import { getMovie } from '../thunks/movie';
+import { IMovie } from '../types/interfaces';
 
-type IMoviesState = {
-  movies: IMovies;
-  search: string;
+type IMovieState = {
+  movieInfo: IMovie;
   isLoading: boolean;
   error: boolean;
 };
 
-const initialState: IMoviesState = {
-  movies: {
-    page: 1,
-    results: [],
-    total_pages: 0,
-    total_results: 0,
+const initialState: IMovieState = {
+  movieInfo: {
+    adult: false,
+    backdrop_path: '',
+    genre_ids: [],
+    id: '',
+    original_language: '',
+    original_title: '',
+    overview: '',
+    popularity: 0,
+    poster_path: '',
+    release_date: '',
+    title: '',
+    video: false,
+    vote_average: 0,
+    vote_count: 0,
   },
-  search: '',
   isLoading: true,
   error: false,
 };
@@ -24,21 +32,17 @@ const initialState: IMoviesState = {
 const movieReducer = createSlice({
   name: 'movie',
   initialState,
-  reducers: {
-    setSearch(state, action) {
-      state.search = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMovies.pending, (state) => {
+      .addCase(getMovie.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getMovies.fulfilled, (state, action) => {
-        state.movies = action.payload;
+      .addCase(getMovie.fulfilled, (state, action) => {
+        state.movieInfo = action.payload;
         state.isLoading = false;
       })
-      .addCase(getMovies.rejected, (state) => {
+      .addCase(getMovie.rejected, (state) => {
         state.error = true;
         state.isLoading = false;
       });
@@ -46,4 +50,3 @@ const movieReducer = createSlice({
 });
 
 export default movieReducer.reducer;
-export const { setSearch } = movieReducer.actions;

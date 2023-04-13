@@ -1,13 +1,14 @@
-import { useState } from 'react';
 import CardForm from '../../components/CardForm/CardForm';
 import Modal from '../../components/Form/Modal/Modal';
 import Form from '../../components/Form/Form';
-import { ICardForm } from '../../types/interfaces';
+import { useAppDispatch, useAppSelector } from './../../store/hooks';
+import { addformCard, toggleModal } from './../../reducer/formReducer';
 import './formPage.css';
 
 const FormPage = () => {
-  const [formValue, setFormValue] = useState<ICardForm[] | []>([]);
-  const [modal, setOpenModal] = useState(false);
+  const formCard = useAppSelector((state) => state.formCard.cardForm);
+  const modal = useAppSelector((state) => state.formCard.modal);
+  const dispatch = useAppDispatch();
 
   const onAddCard = (
     firstName: string,
@@ -19,15 +20,11 @@ const FormPage = () => {
     avatar: File,
     check: boolean
   ) => {
-    const newArr = [
-      ...formValue,
-      { firstName, lastName, zipCode, birthDay, country, news, avatar, check },
-    ];
-    setFormValue(newArr);
-    setOpenModal(true);
+    dispatch(addformCard({ firstName, lastName, zipCode, birthDay, country, news, avatar, check }));
+    dispatch(toggleModal(true));
   };
 
-  const elements = formValue.map((item, index) => {
+  const elements = formCard.map((item, index) => {
     return <CardForm key={index} {...item} />;
   });
 
@@ -39,7 +36,7 @@ const FormPage = () => {
         <ul className="card__list-form">{elements}</ul>
       </div>
       {modal ? <div className="overlay"></div> : ''}
-      {modal ? <Modal onClickModal={() => setOpenModal(false)} /> : ''}
+      {modal ? <Modal onClickModal={() => dispatch(toggleModal(false))} /> : ''}
     </>
   );
 };
