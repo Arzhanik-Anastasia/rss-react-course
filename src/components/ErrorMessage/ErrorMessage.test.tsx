@@ -6,6 +6,6 @@ describe('ErrorMessage', () => {
     const { container } = render(
       <div className="content-main">{true ? <ErrorMessage /> : null}</div>
     );
-    expect(container).toHaveTextContent(/Возникла ошибка/i);
+    expect(container).toHaveTextContent(/Возникла ошибка, зайдите через VPN/i);
   });
 });
