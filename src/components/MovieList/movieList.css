@@ -1,0 +1,18 @@
+.movieslist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0
+  
+  }
+  .movieslist li {
+    list-style: none;
+  }
+  .movie__item {
+    padding: 10px 0px;
+    width: 250px;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  
