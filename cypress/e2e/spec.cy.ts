@@ -38,9 +38,10 @@ describe('Tests', () => {
     cy.get('input[name="zipCode"]').type('123456');
     cy.get('input[name="birthDay"]').type('2000-01-01');
     cy.get('select').select('Belarus');
-    /*     cy.get('.input__checkbox').click(); */
-    /*     cy.get('.form__btn-submit').click();
-    cy.contains('Ivan'); */
+    cy.get('input[name="avatar"]').selectFile('./cypress/fixtures/test.png');
+    cy.get('input[name="check"]').click();
+    cy.get('.form__btn-submit').click();
+    cy.contains('Ivan');
   });
 
   it('coverage saving', () => {
