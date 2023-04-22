@@ -1,0 +1,20 @@
+.movie__img {
+    width: 250px;
+    height: 370px;
+    border-radius: 6px;
+    transition: all 0.3s;
+  }
+  .movie__inner {
+    color: black;
+    position: relative;
+    cursor: pointer;
+  }
+  .movie__inner .movie__img:hover {
+    opacity: 0.5;
+  }
+
+  .movie__title {
+    font-size: 20px;
+    color: azure;
+  }
+  
